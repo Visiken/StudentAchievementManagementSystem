@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>你好啊！</title>
+    <script src="https://cdn.staticfile.org/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+  <h1>你好啊！大兄弟！</h1>
+  <h1>不知道啊！大兄弟！！</h1>
+  <button id="getBtn">ajaxget请求</button>
+  <button id="postBtn">ajaxpost请求</button>
+  <button id="Btn">ajax请求</button>
+  <button id="BtnJson">ajaxJson请求</button>
+
+  <script>
+      $(function () {
+          // 当 DOM 加载完毕时执行
+          $('#getBtn').click(function () {
+              $.get('/test/ajaxGet',
+                  {
+                      name: '素悟空',
+                      password: '123456'
+                  },
+                  function (data) {
+                      console.log(data);
+                  }
+              );
+          });
+
+          $('#postBtn').click(function () {
+              $.post('/test/ajaxPost',
+                  {
+                      name: '猪八戒',
+                      password: '123456'
+                  },
+                  function (data) {
+                      console.log(data);
+                  }
+              );
+          });
+
+          $('#Btn').click(function () {
+              $.ajax({
+                  url: '/test/ajax',
+                  type: 'GET',
+                  data: {
+                      'name': '白骨精',
+                      'password': '23131313'
+                  },
+                  success: function (data) {
+                      console.log(data);
+                  }
+              });
+          });
+
+          // 前台如何处理json字符串
+          $("#BtnJson").click(function() {
+              $.get('/test/testjson', function(data) {
+              // 把json串转换成json对象再操作
+                  var jsonObj = JSON.parse(data);
+                  console.log(jsonObj.name);
+              });
+          });
+      });
+  </script>
+</body>
+</html>
